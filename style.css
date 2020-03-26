@@ -1,0 +1,71 @@
+
+body {
+  padding: 5px 10px;
+}
+
+svg {
+  display: block;
+  width: 100%;
+}
+
+#title{
+    text-align: center;
+}
+
+#container{
+    width:50%;
+    margin:0 auto;
+}
+
+#states *.on {
+  fill: red;
+}
+
+.list-of-states {
+  margin: 0;
+  padding: 0;
+  columns: 150px auto;
+  column-gap: 10px;
+  list-style: none;
+}
+.list-of-states li {
+  padding: 2px 4px;
+  display: inline-block;
+  width: 100%;
+}
+.list-of-states li.on {
+  background: red;
+  color: white;
+}
+.list-of-states tr.on {
+  background: red;
+  color: white;
+}
+
+.landing {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+}
+
+#mappa{
+  padding-top: 2vh;
+  height: 27vh;
+  width: auto;
+  z-index: 3;
+  background-color: white;
+}
+
+#tabella{
+  padding-top: 33vh;
+  z-index: 2;
+}
+
+#title{
+  background-color: white;
+
+}
+#title h1{
+  margin:0;
+
+}
