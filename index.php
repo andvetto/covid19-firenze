@@ -192,10 +192,10 @@ if ($result = $mysqli->query('SELECT * FROM comuni ORDER BY ' .  $column . ' ' .
                 <tr>
                   
                   <th>TOTALE</th>
-                  <th>569</th>                  
-                  <th>+29</th>                  
+                  <th>608</th>                  
+                  <th>+39</th>                  
                   <th>20</th>                  
-                  <th>+4</th>                  
+                  <th>0</th>                  
                 </tr>
                 <thead class="thead-light">
               <tr>
@@ -208,7 +208,7 @@ if ($result = $mysqli->query('SELECT * FROM comuni ORDER BY ' .  $column . ' ' .
             </thead>
             </tbody>
             </table>
-            <p>Ultimo aggiornamento: 26/03/2020 21:30</p>
+            <p>Ultimo aggiornamento: 27/03/2020 22:30</p>
         </div>
      
        
