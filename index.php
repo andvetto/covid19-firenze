@@ -31,9 +31,37 @@ if ($result = $mysqli->query('SELECT * FROM comuni ORDER BY ' .  $column . ' ' .
 	$up_or_down = str_replace(array('ASC','DESC'), array('up','down'), $sort_order); 
 	$asc_or_desc = $sort_order == 'ASC' ? 'desc' : 'asc';
 	$add_class = ' class="highlight"';
-	?>
+  
+  // Tot Positivi
+  $respositivi = $mysqli->query('SELECT sum(positivi) FROM comuni');
+  if (FALSE === $respositivi) die("Select sum failed: ".mysqli_error);
+  $positivi = mysqli_fetch_row($respositivi);
+  $totpositivi = $positivi[0];
 
+  // Tot Decessi
+  $resdecessi = $mysqli->query('SELECT sum(deceduti) FROM comuni');
+  if (FALSE === $resdecessi) die("Select sum failed: ".mysqli_error);
+  $decessi = mysqli_fetch_row($resdecessi);
+  $totdecessi = $decessi[0];
 
+  // Tot Nuovi Positivi
+  $resnuovipositivi = $mysqli->query('SELECT sum(nuovi_positivi) FROM comuni');
+  if (FALSE === $resnuovipositivi) $totnuovipositivi = 0;
+  else {
+    $nuovipositivi = mysqli_fetch_row($resnuovipositivi);
+    $totnuovipositivi = $nuovipositivi[0];
+  }
+
+  // Tot Nuovi Decessi
+  $resnuovidecessi = $mysqli->query('SELECT sum(nuovi_deceduti) FROM comuni');
+  if (FALSE === $resnuovidecessi) $totnuovidecessi = 0;
+  else {
+    $nuovidecessi = mysqli_fetch_row($resnuovidecessi);
+    $totnuovidecessi = $nuovidecessi[0];
+  }
+ 
+
+?>
 <!DOCTYPE html>
 
 <html>
@@ -46,12 +74,9 @@ if ($result = $mysqli->query('SELECT * FROM comuni ORDER BY ' .  $column . ' ' .
 
     <body>
 
-
-        
-
         <header class="fixed-top">
           <div id="title">
-              <h1>COVID19 Azienda Usl Toscana centro</h1>
+              <h1>COVID19 Toscana centro Firenze</h1>
           </div>
 
           <div class="container-fluid" id="mappa">
@@ -177,7 +202,15 @@ if ($result = $mysqli->query('SELECT * FROM comuni ORDER BY ' .  $column . ' ' .
               </tr>
             </thead>
             <tbody class="list-of-states">
-
+                <tr>
+                  
+                  <th>TOTALE</th>
+                  <th><?php echo $totpositivi; ?></th>                  
+                  <th><?php echo $totnuovipositivi; ?></th>                  
+                  <th><?php echo $totdecessi; ?></th>                  
+                  <th><?php echo $totnuovidecessi; ?></th>                  
+                 
+                </tr>
             <?php while ($row = $result->fetch_assoc()): ?>
                 <tr data-state="<?php echo $row['map_name']; ?>">
                   <td<?php echo $column == 'comune' ? $add_class : ''; ?>><?php echo $row['comune']; ?></td>
@@ -189,14 +222,7 @@ if ($result = $mysqli->query('SELECT * FROM comuni ORDER BY ' .  $column . ' ' .
 
             <?php endwhile; ?>
 
-                <tr>
-                  
-                  <th>TOTALE</th>
-                  <th>608</th>                  
-                  <th>+39</th>                  
-                  <th>20</th>                  
-                  <th>0</th>                  
-                </tr>
+
                 <thead class="thead-light">
               <tr>
                   <th><a href="index.php?column=comune&order=<?php echo $asc_or_desc; ?>">Comune<i class="fas fa-sort<?php echo $column == 'comune' ? '-' . $up_or_down : ''; ?>"></i></a></th>
@@ -208,7 +234,7 @@ if ($result = $mysqli->query('SELECT * FROM comuni ORDER BY ' .  $column . ' ' .
             </thead>
             </tbody>
             </table>
-            <p>Ultimo aggiornamento: 27/03/2020 22:30</p>
+            <p>Ultimo aggiornamento: 28/03/2020 22:30</p>
         </div>
      
        
